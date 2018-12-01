@@ -9,6 +9,8 @@ django-rest-framework = "*"
 python-magic = "*"
 wand = "*"
 django-rest-swagger = "*"
+django-rest-registration = "*"
+dry-rest-permissions = "*"
 
 [dev-packages]
 httpie = "*"

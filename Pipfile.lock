@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a8207ca519ebb9795b3b1ede74a7e52657acc5ca513c411b5727cc82a0d266ed"
+            "sha256": "97ed7657a454e9d31b3f5ee0f3dbb446c3501aaea84617f812f5199ed0f9e07d"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -18,10 +18,10 @@
     "default": {
         "certifi": {
             "hashes": [
-                "sha256:339dc09518b07e2fa7eda5450740925974815557727d6bd35d319c1524a04a4c",
-                "sha256:6d58c986d22b038c8c0df30d639f23a3e6d172a05c3583e766f4c0b785c0986a"
+                "sha256:47f9c83ef4c0c621eaef743f133f09fa8a74a9b75f037e8624f83bd1b6626cb7",
+                "sha256:993f830721089fef441cdfeb4b2c8c9df86f0c63239f06bd025a76a7daddb033"
             ],
-            "version": "==2018.10.15"
+            "version": "==2018.11.29"
         },
         "chardet": {
             "hashes": [
@@ -59,6 +59,14 @@
             "index": "pypi",
             "version": "==0.1.0"
         },
+        "django-rest-registration": {
+            "hashes": [
+                "sha256:59f3fdf09a71cc7ecf757798f6462921fba4f1330bddb4ee8306272ad31cc234",
+                "sha256:f61edd141516eb34bfd465a74f2d95bce9fbebde3ff8ffd06ab8e407088d567c"
+            ],
+            "index": "pypi",
+            "version": "==0.3.13"
+        },
         "django-rest-swagger": {
             "hashes": [
                 "sha256:48f6aded9937e90ae7cbe9e6c932b9744b8af80cc4e010088b3278c700e0685b",
@@ -73,6 +81,14 @@
                 "sha256:63f76cbe1e7d12b94c357d7e54401103b2e52aef0f7c1650d6c820ad708776e5"
             ],
             "version": "==3.9.0"
+        },
+        "dry-rest-permissions": {
+            "hashes": [
+                "sha256:1f40461184063390e5b24e9c5602eb8cc8c3c2433c796f39a5332065bfbddd2b",
+                "sha256:f3fe685760004ce182801602819b43ebfa922e587036f1f5a5c10ffcfa646039"
+            ],
+            "index": "pypi",
+            "version": "==0.1.10"
         },
         "idna": {
             "hashes": [
@@ -199,10 +215,10 @@
     "develop": {
         "certifi": {
             "hashes": [
-                "sha256:339dc09518b07e2fa7eda5450740925974815557727d6bd35d319c1524a04a4c",
-                "sha256:6d58c986d22b038c8c0df30d639f23a3e6d172a05c3583e766f4c0b785c0986a"
+                "sha256:47f9c83ef4c0c621eaef743f133f09fa8a74a9b75f037e8624f83bd1b6626cb7",
+                "sha256:993f830721089fef441cdfeb4b2c8c9df86f0c63239f06bd025a76a7daddb033"
             ],
-            "version": "==2018.10.15"
+            "version": "==2018.11.29"
         },
         "chardet": {
             "hashes": [
