@@ -11,11 +11,12 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'uploads',)
 
 
-class UploadSerializer(serializers.HyperlinkedModelSerializer):
+class UploadSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     created = serializers.DateTimeField(required=False)
+    file = serializers.FileField(allow_empty_file=False, use_url=False)
 
     class Meta:
         model = Upload
-        fields = ('title', 'owner', 'created',)
+        fields = ('id', 'title', 'owner', 'created', 'file',)
 
