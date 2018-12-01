@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'rest_framework_swagger',
+    'rest_registration',
+    'dry_rest_permissions',
 ]
 
 MIDDLEWARE = [
@@ -79,24 +82,42 @@ REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': (
         'rest_framework.parsers.JSONParser',
         'rest_framework.parsers.MultiPartParser'
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication'
     )
 }
 
 SWAGGER_SETTINGS = {
+    'JSON_EDITOR': True,
     'USE_SESSION_AUTH': False,
     'SECURITY_DEFINITIONS': {
         'basic': {
             'type': 'basic'
         },
-        'apiKey': {
-            'type': 'apiKey'
+        'token': {
+            'type': 'apiKey',
+            'name': 'token',
+            'in': 'header'
         }
     }
 }
 
-LOGIN_URL = 'rest_framework:login'
+REST_REGISTRATION = {
+    'REGISTER_VERIFICATION_ENABLED': False,
 
-LOGOUT_URL = 'rest_framework:logout'
+    'RESET_PASSWORD_VERIFICATION_URL': 'https://frontend-url/reset-password/',
+
+    'REGISTER_EMAIL_VERIFICATION_ENABLED': False,
+
+    'VERIFICATION_FROM_EMAIL': 'no-reply@example.com',
+}
+
+LOGIN_URL = 'rest_registration:login'
+
+LOGOUT_URL = 'rest_registration:logout'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -146,3 +167,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
