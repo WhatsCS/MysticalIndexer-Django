@@ -97,9 +97,9 @@ SWAGGER_SETTINGS = {
         'basic': {
             'type': 'basic'
         },
-        'token': {
+        'Authentication Header': {
             'type': 'apiKey',
-            'name': 'token',
+            'name': 'Token',
             'in': 'header'
         }
     }
