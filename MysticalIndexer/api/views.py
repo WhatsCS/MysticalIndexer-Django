@@ -1,6 +1,7 @@
 import os
 from .models import Upload
 from .serializers import UserSerializer, UploadSerializer
+from .utils.thumbnails import get_mimetype, Thumbify
 from datetime import datetime
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -36,29 +37,13 @@ class UploadViewSet(viewsets.ModelViewSet):
         # using blake2b hash the file and then set the name back
         hash = blake2b(str.encode(name), digest_size=10, salt=str.encode(settings.SECRET_KEY)[:16]).hexdigest()
         file_object.name = hash + '.' + ext
+
+        mime = get_mimetype(file_object.name)
         # save both the user as owner and newly edited file
-        serializer.save(owner=self.request.user, file=file_object)
+        serializer.save(owner=self.request.user, file=file_object, type=mime)
 
         # TODO: Either thumbify here or somewhere else. Most likely here.
 
     def perform_destroy(self, instance):
         os.remove(os.path.join(settings.MEDIA_ROOT, instance.file.path))
         return instance.delete()
-
-# class UploadList(generics.ListAPIView,
-#                  generics.CreateAPIView):
-#     queryset = Upload.objects.all()
-#     serializer_class = UploadSerializer
-#     parser_classes = (parsers.JSONParser, parsers.MultiPartParser, parsers.FormParser)
-#
-#     def perform_create(self, serializer):
-#         # Get mimetype using magic
-#         type = None
-#         serializer.save(owner=self.request.user)
-#
-#
-# class UploadDetail(generics.RetrieveAPIView,
-#                    generics.UpdateAPIView,
-#                    generics.DestroyAPIView):
-#     queryset = Upload.objects.all()
-#     serializer_class = UploadSerializer
