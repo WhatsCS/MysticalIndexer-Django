@@ -8,7 +8,12 @@ django = "*"
 django-rest-framework = "*"
 python-magic = "*"
 wand = "*"
-django-rest-swagger = "*"
+django-rest-registration = "*"
+dry-rest-permissions = "*"
+drf-yasg = "*"
+djoser = "*"
+swagger-spec-validator = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 httpie = "*"

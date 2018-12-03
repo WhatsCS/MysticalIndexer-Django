@@ -39,12 +39,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework_swagger',
+    'rest_framework.authtoken',
+    'drf_yasg',
+    'djoser',
+    # 'rest_registration',
+    'dry_rest_permissions',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -72,6 +78,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'MysticalIndexer.wsgi.application'
 
+CORS_ORIGIN_WHITELIST = (
+    'localhost:8080',
+)
+
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
@@ -79,24 +89,47 @@ REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': (
         'rest_framework.parsers.JSONParser',
         'rest_framework.parsers.MultiPartParser'
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication'
     )
 }
 
+# REST_REGISTRATION = {
+#     'REGISTER_VERIFICATION_ENABLED': False,
+#
+#     'RESET_PASSWORD_VERIFICATION_URL': 'https://frontend-url/reset-password/',
+#
+#     'REGISTER_EMAIL_VERIFICATION_ENABLED': False,
+#
+#     'VERIFICATION_FROM_EMAIL': 'no-reply@example.com',
+# }
+
+DJOSER = {
+    'SERIALIZERS': {
+        'user':
+            'api.serializers.UserSerializer',
+    }
+}
+
 SWAGGER_SETTINGS = {
-    'USE_SESSION_AUTH': False,
     'SECURITY_DEFINITIONS': {
         'basic': {
             'type': 'basic'
         },
-        'apiKey': {
-            'type': 'apiKey'
-        }
+        "api_key": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        },
     }
 }
 
-LOGIN_URL = 'rest_framework:login'
-
-LOGOUT_URL = 'rest_framework:logout'
+# LOGIN_URL = 'rest_registration:login'
+#
+# LOGOUT_URL = 'rest_registration:logout'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -146,3 +179,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

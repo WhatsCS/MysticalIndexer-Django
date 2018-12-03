@@ -8,6 +8,11 @@ from wand.image import Image
 from subprocess import call
 
 
+def get_mimetype(fname):
+    ftype = magic.from_file(fname, mime=True)
+    return ftype
+
+
 class Thumbify:
     """
     This will probably need access to specific things that I can't think of right now.
@@ -22,9 +27,7 @@ class Thumbify:
         self._dispatcher()
 
     def _dispatcher(self):
-        print(self.fname)
-        ftype = magic.from_file(self.fname, mime=True)
-
+        ftype = get_mimetype(self.fname)
         if ftype.rsplit("/")[0] == "image":
             self.create_thumb()
         elif ftype.rsplit("/")[0] == "video":
