@@ -40,14 +40,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_framework_swagger',
-    'rest_registration',
+    'drf_yasg',
+    'djoser',
+    # 'rest_registration',
     'dry_rest_permissions',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -75,6 +78,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'MysticalIndexer.wsgi.application'
 
+CORS_ORIGIN_WHITELIST = (
+    'localhost:8080',
+)
+
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
@@ -90,34 +97,39 @@ REST_FRAMEWORK = {
     )
 }
 
+# REST_REGISTRATION = {
+#     'REGISTER_VERIFICATION_ENABLED': False,
+#
+#     'RESET_PASSWORD_VERIFICATION_URL': 'https://frontend-url/reset-password/',
+#
+#     'REGISTER_EMAIL_VERIFICATION_ENABLED': False,
+#
+#     'VERIFICATION_FROM_EMAIL': 'no-reply@example.com',
+# }
+
+DJOSER = {
+    'SERIALIZERS': {
+        'user':
+            'api.serializers.UserSerializer',
+    }
+}
+
 SWAGGER_SETTINGS = {
-    'JSON_EDITOR': True,
-    'USE_SESSION_AUTH': False,
     'SECURITY_DEFINITIONS': {
         'basic': {
             'type': 'basic'
         },
-        'Authentication Header': {
-            'type': 'apiKey',
-            'name': 'Token',
-            'in': 'header'
-        }
+        "api_key": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        },
     }
 }
 
-REST_REGISTRATION = {
-    'REGISTER_VERIFICATION_ENABLED': False,
-
-    'RESET_PASSWORD_VERIFICATION_URL': 'https://frontend-url/reset-password/',
-
-    'REGISTER_EMAIL_VERIFICATION_ENABLED': False,
-
-    'VERIFICATION_FROM_EMAIL': 'no-reply@example.com',
-}
-
-LOGIN_URL = 'rest_registration:login'
-
-LOGOUT_URL = 'rest_registration:logout'
+# LOGIN_URL = 'rest_registration:login'
+#
+# LOGOUT_URL = 'rest_registration:logout'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
