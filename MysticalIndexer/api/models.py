@@ -1,3 +1,5 @@
+import os
+from .utils.thumbnails import get_mimetype, Thumbify
 from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save
@@ -51,3 +53,14 @@ class Upload(models.Model):
         if not self.id:
             self.created = timezone.now()
         return super(Upload, self).save(*args, **kwargs)
+
+
+@receiver(post_save, sender=Upload, dispatch_uid="update_thumbnail_type")
+def update_thumb_type(sender, instance, **kwargs):
+    fname = os.path.join(settings.MEDIA_ROOT, instance.file.name)
+    mime = get_mimetype(fname)
+    Thumbify(fname)
+    instance.type = mime
+    post_save.disconnect(update_thumb_type, sender=Upload, dispatch_uid="update_thumbnail_type")
+    instance.save()
+    post_save.connect(update_thumb_type, sender=Upload, dispatch_uid="update_thumbnail_type")

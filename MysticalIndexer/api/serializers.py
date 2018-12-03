@@ -11,12 +11,13 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'uploads',)
 
 
-class UploadSerializer(serializers.ModelSerializer):
+class UploadSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
-    created = serializers.DateTimeField(required=False)
-    file = serializers.FileField(allow_empty_file=False, use_url=False)
+    created = serializers.ReadOnlyField()
+    filename = serializers.ReadOnlyField()
+    file = serializers.FileField(allow_empty_file=False, use_url=False, write_only=True)
+# TODO: Explore options for serving an aliased direct link to the image.
 
     class Meta:
         model = Upload
-        fields = ('id', 'title', 'owner', 'created', 'file',)
-
+        fields = ('url', 'id', 'title', 'owner', 'created', 'file', 'filename')
