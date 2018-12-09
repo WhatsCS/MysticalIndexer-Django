@@ -42,9 +42,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'drf_yasg',
     'djoser',
-    # 'rest_registration',
     'dry_rest_permissions',
     'corsheaders',
+    'hashid_field',
 ]
 
 MIDDLEWARE = [
@@ -97,16 +97,6 @@ REST_FRAMEWORK = {
     )
 }
 
-# REST_REGISTRATION = {
-#     'REGISTER_VERIFICATION_ENABLED': False,
-#
-#     'RESET_PASSWORD_VERIFICATION_URL': 'https://frontend-url/reset-password/',
-#
-#     'REGISTER_EMAIL_VERIFICATION_ENABLED': False,
-#
-#     'VERIFICATION_FROM_EMAIL': 'no-reply@example.com',
-# }
-
 DJOSER = {
     'SERIALIZERS': {
         'user':
@@ -126,6 +116,8 @@ SWAGGER_SETTINGS = {
         },
     }
 }
+
+HASHID_FIELD_SALT = "ranomd test salt because reasons"
 
 # LOGIN_URL = 'rest_registration:login'
 #
