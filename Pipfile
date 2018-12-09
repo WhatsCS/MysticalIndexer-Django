@@ -14,6 +14,7 @@ drf-yasg = "*"
 djoser = "*"
 swagger-spec-validator = "*"
 django-cors-headers = "*"
+django-hashid-field = "*"
 
 [dev-packages]
 httpie = "*"
