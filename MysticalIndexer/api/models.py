@@ -12,7 +12,7 @@ from hashid_field import HashidAutoField
 
 
 def unicode_valid_name(self, name):
-    return str(name).strip().replace(' ', '_')
+    return str(name).strip().replace(" ", "_")
 
 
 FileSystemStorage.get_valid_name = unicode_valid_name
@@ -30,7 +30,9 @@ class Upload(models.Model):
     file = models.FileField()
     created = models.DateTimeField()
     type = models.CharField(max_length=32)
-    owner = models.ForeignKey('auth.User', related_name='uploads', on_delete=models.CASCADE)
+    owner = models.ForeignKey(
+        "auth.User", related_name="uploads", on_delete=models.CASCADE
+    )
     url = models.URLField()
 
     # Allow general read permissions
@@ -67,6 +69,10 @@ def update_thumb_type(sender, instance, **kwargs):
     Thumbify(fname)
     instance.type = mime
     # instance.url = instance.file.url
-    post_save.disconnect(update_thumb_type, sender=Upload, dispatch_uid="update_thumbnail_type")
+    post_save.disconnect(
+        update_thumb_type, sender=Upload, dispatch_uid="update_thumbnail_type"
+    )
     instance.save()
-    post_save.connect(update_thumb_type, sender=Upload, dispatch_uid="update_thumbnail_type")
+    post_save.connect(
+        update_thumb_type, sender=Upload, dispatch_uid="update_thumbnail_type"
+    )

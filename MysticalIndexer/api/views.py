@@ -40,15 +40,19 @@ class UploadViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         # file object for manipulation
-        file_object = self.request.FILES['file']
-        name, ext = file_object.name.split('.')
-        #filename = random_emojis()
-        #filename += '.' + ext
+        file_object = self.request.FILES["file"]
+        name, ext = file_object.name.split(".")
+        # filename = random_emojis()
+        # filename += '.' + ext
         name = random_emojis()
-        file_object.name = name + '.' + ext
+        file_object.name = name + "." + ext
 
         # save both the user as owner and the newly edited file
-        serializer.save(owner=self.request.user, file=file_object, url='{0}{1}'.format(settings.MEDIA_URL, file_object.name))
+        serializer.save(
+            owner=self.request.user,
+            file=file_object,
+            url="{0}{1}".format(settings.MEDIA_URL, file_object.name),
+        )
 
     def perform_destroy(self, instance):
         os.remove(os.path.join(settings.MEDIA_ROOT, instance.file.path))

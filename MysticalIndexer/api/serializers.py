@@ -6,18 +6,19 @@ from hashid_field.rest import HashidSerializerCharField
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     uploads = serializers.PrimaryKeyRelatedField(
-        pk_field=HashidSerializerCharField(source_field='api.Upload.id'),
-        many=True, read_only=True
+        pk_field=HashidSerializerCharField(source_field="api.Upload.id"),
+        many=True,
+        read_only=True,
     )
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'uploads',)
+        fields = ("id", "username", "uploads")
 
 
 class UploadSerializer(serializers.ModelSerializer):
-    id = HashidSerializerCharField(source_field='api.Upload.id', read_only=True)
-    owner = serializers.ReadOnlyField(source='owner.username')
+    id = HashidSerializerCharField(source_field="api.Upload.id", read_only=True)
+    owner = serializers.ReadOnlyField(source="owner.username")
     created = serializers.ReadOnlyField()
     filename = serializers.ReadOnlyField()
     file = serializers.FileField(allow_empty_file=False, use_url=False)
@@ -26,4 +27,4 @@ class UploadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Upload
-        fields = ('id', 'title', 'owner', 'created', 'file', 'filename', 'url',)
+        fields = ("id", "title", "owner", "created", "file", "filename", "url")
