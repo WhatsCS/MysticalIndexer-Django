@@ -24,7 +24,6 @@ from rest_framework.permissions import AllowAny
 # Swagger UI generation setup
 schema_view = get_schema_view(
     openapi.Info(title="MysticalIndexer API", default_version="v1", description="????"),
-    validators=["ssv"],
     public=True,
     permission_classes=(AllowAny,),
 )

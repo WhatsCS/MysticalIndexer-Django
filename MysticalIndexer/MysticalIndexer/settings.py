@@ -78,7 +78,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "MysticalIndexer.wsgi.application"
 
-CORS_ORIGIN_WHITELIST = ("localhost:8080",)
+# CORS_ORIGIN_WHITELIST = ("localhost:8080",)
 
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
@@ -99,7 +99,8 @@ SWAGGER_SETTINGS = {
     "SECURITY_DEFINITIONS": {
         "basic": {"type": "basic"},
         "api_key": {"type": "apiKey", "name": "Authorization", "in": "header"},
-    }
+    },
+    "USE_SESSION_AUTH": False
 }
 
 HASHID_FIELD_SALT = "ranomd test salt because reasons"

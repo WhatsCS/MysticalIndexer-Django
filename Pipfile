@@ -1,23 +1,26 @@
 [[source]]
+name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
-name = "pypi"
+
+[dev-packages]
+black = "*"
 
 [packages]
 django = "*"
-django-rest-framework = "*"
-python-magic = "*"
-wand = "*"
-django-rest-registration = "*"
-dry-rest-permissions = "*"
+djangorestframework = "*"
 drf-yasg = "*"
 djoser = "*"
-swagger-spec-validator = "*"
-django-cors-headers = "*"
+markdown = "*"
+dry-rest-permissions = "*"
+packaging = "*"
 django-hashid-field = "*"
-
-[dev-packages]
-httpie = "*"
+wand = "*"
+python-magic = "*"
+django-cors-headers = "*"
 
 [requires]
 python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true
