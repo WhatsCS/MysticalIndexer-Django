@@ -12,6 +12,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     )
 
     class Meta:
+        ref_name = "API-UserSerializer"
         model = User
         fields = ("id", "username", "uploads")
 

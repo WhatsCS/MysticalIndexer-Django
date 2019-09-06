@@ -44,7 +44,7 @@ class UploadViewSet(viewsets.ModelViewSet):
         name, ext = file_object.name.split(".")
         # filename = random_emojis()
         # filename += '.' + ext
-        name = random_emojis()
+        name = blake2b_hashing(name)
         file_object.name = name + "." + ext
 
         # save both the user as owner and the newly edited file

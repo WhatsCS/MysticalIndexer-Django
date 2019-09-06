@@ -86,7 +86,7 @@ def blake2b_hashing(name):
     name = name + datetime.now().strftime("%c.%f")
     # using blake2b hash the file and then set the name back
     hash = blake2b(
-        str.encode(name), digest_size=10, salt=str.encode(settings.SECRET_KEY)[:16]
+        str.encode(name), digest_size=10, salt=str.encode(settings.SECRET_KEY)[:8]
     ).hexdigest()
     return hash
 
