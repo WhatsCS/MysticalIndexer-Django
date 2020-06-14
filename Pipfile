@@ -4,17 +4,17 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
-django-rest-framework = "*"
+django = "==3.0.7"
 python-magic = "*"
 wand = "*"
 django-rest-registration = "*"
-dry-rest-permissions = "*"
 drf-yasg = "*"
 djoser = "*"
 swagger-spec-validator = "*"
 django-cors-headers = "*"
 django-hashid-field = "*"
+djangorestframework-guardian = "*"
+pygments = "==2.6.1"
 
 [dev-packages]
 httpie = "*"
